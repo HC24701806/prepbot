@@ -20,7 +20,7 @@ const db = getFirestore(app)
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('register')
-		.setDescription('Registers user'),
+		.setDescription('Makes an account. You need an account to use this bot.'),
 	async execute(interaction) {
     let userID = interaction.user.id
     const docRef = doc(db, 'users', userID)

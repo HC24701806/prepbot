@@ -20,7 +20,7 @@ const db = getFirestore(app)
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('review')
-		.setDescription('Gets a problem in your review list.')
+		.setDescription('Gives a problem that you have gotten wrong before. Parameters: default for no filter, amc for AMC 10/12 only, aime for AIME only')
         .addStringOption(option =>
             option
                 .setName('test')

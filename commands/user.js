@@ -20,7 +20,7 @@ const db = getFirestore(app)
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('user')
-		.setDescription('Gets user profile, add tag to display another member')
+		.setDescription('Returns user profile. Parameters: default for own profile, add tag for another user\'s profile')
     .addUserOption(option => 
       option
         .setName('target')

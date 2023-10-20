@@ -20,7 +20,7 @@ const db = getFirestore(app)
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('prob')
-		.setDescription('Gets a problem. Use following parameters for certain tests: amc for AMC 10/12, aime for AIME')
+		.setDescription('Gives a problem. Each problem will give a certain number of points. Currently supported tests: AMC 10/12, AIME. Parameters: default for no filter, amc for AMC 10/12 only, aime for AIME only')
         .addStringOption(option =>
             option
                 .setName('test')
@@ -146,7 +146,6 @@ module.exports = {
                 const reviewRef = doc(db, 'review', interaction.user.id)
                 let reviewProbs = (await getDoc(reviewRef)).data().problems
                 let indexStr = index.toString()
-
                 if(Object.keys(reviewProbs).includes(indexStr)) {
                     if(code && code == 'correct') {
                         if(reviewProbs[indexStr] == 2) {
