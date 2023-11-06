@@ -20,7 +20,7 @@ const db = getFirestore(app)
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('top')
-		.setDescription('Returns leaderboard. Sort by either points scored (default) or problems solved (prblms). Ranks updated once per minute.')
+		.setDescription('Returns leaderboard')
         .addStringOption(option =>
             option
                 .setName('sortby')

@@ -20,7 +20,7 @@ const db = getFirestore(app)
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('user')
-		.setDescription('Returns user profile. Parameters: default for own profile, add tag for another user\'s profile')
+		.setDescription('Returns user profile')
     .addUserOption(option => 
       option
         .setName('target')
@@ -37,10 +37,9 @@ module.exports = {
 
     const targetData = (await targetDoc).data()
     const points = (await getDoc(doc(db, 'points', targetID))).data()
-    const tournament = (await getDoc(doc(db, 'tournament', targetID))).data()
 
-    let ranks = [points.rank, points.highestRank, tournament.rank, tournament.highestRank]
-    for(let i = 0; i < 4; ++i) {
+    let ranks = [points.rank, points.highestRank]
+    for(let i = 0; i < 2; ++i) {
       if(ranks[i] == 0) {
         ranks[i] = 'N/A'
       } else {
@@ -61,15 +60,7 @@ module.exports = {
         {name: 'Problems Solved', value: points.problemsSolved.toString(), inline: true},
         {name: 'Accuracy', value: (Math.round(points.problemsSolved/points.problemsAttempted * 1000)/10.0).toString() + '%', inline: true},
         {name: 'Current Rank', value: ranks[0], inline: true},
-        {name: 'Highest Rank', value: ranks[1], inline: true}/*,
-        {name: '\u200b', value: '\u200b'},
-        {name: 'Tournament', value: '\u200b'},
-        {name: 'Current Rating', value: tournament.rating.toString(), inline: true},
-        {name: 'Highest Rating', value: tournament.highestRating.toString(), inline: true},
-        {name: 'Games', value: tournament.numGames.toString(), inline: true},
-        {name: 'Wins', value: tournament.numWins.toString(), inline: true},
-        {name: 'Current Rank', value: ranks[2], inline: true},
-        {name: 'Highest Rank', value: ranks[3], inline: true}*/
+        {name: 'Highest Rank', value: ranks[1], inline: true}
       )
 
     await interaction.reply({embeds: [embed]})

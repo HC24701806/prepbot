@@ -20,7 +20,7 @@ const db = getFirestore(app)
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('prob')
-		.setDescription('Gives a problem. Each problem will give a certain number of points. Currently supported tests: AMC 10/12, AIME. Parameters: default for no filter, amc for AMC 10/12 only, aime for AIME only')
+		.setDescription('Gives a problem. Currently supported tests: AMC 10/12, AIME')
         .addStringOption(option =>
             option
                 .setName('test')
